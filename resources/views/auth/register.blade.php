@@ -1,77 +1,74 @@
-@extends('layouts.app')
+<x-guest-layout>
+    <x-auth-card>
+        <!-- Validation Errors -->
+        <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+        <form method="POST" action="{{ route('register') }}">
+            @csrf
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-
-                        <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+            <div class="grid gap-6">
+                <!-- Name -->
+                <div class="space-y-2">
+                    <x-label for="name" :value="__('Name')" />
+                    <x-input-with-icon-wrapper>
+                        <x-slot name="icon">
+                            <x-heroicon-o-user aria-hidden="true" class="w-5 h-5" />
+                        </x-slot>
+                        <x-input withicon id="name" class="block w-full" type="text" name="name" :value="old('name')"
+                            required autofocus placeholder="{{ __('Name') }}" />
+                    </x-input-with-icon-wrapper>
                 </div>
+
+                <!-- Email Address -->
+                <div class="space-y-2">
+                    <x-label for="email" :value="__('Email')" />
+                    <x-input-with-icon-wrapper>
+                        <x-slot name="icon">
+                            <x-heroicon-o-mail aria-hidden="true" class="w-5 h-5" />
+                        </x-slot>
+                        <x-input withicon id="email" class="block w-full" type="email" name="email"
+                            :value="old('email')" required placeholder="{{ __('Email') }}" />
+                    </x-input-with-icon-wrapper>
+                </div>
+
+                <!-- Password -->
+                <div class="space-y-2">
+                    <x-label for="password" :value="__('Password')" />
+                    <x-input-with-icon-wrapper>
+                        <x-slot name="icon">
+                            <x-heroicon-o-lock-closed aria-hidden="true" class="w-5 h-5" />
+                        </x-slot>
+                        <x-input withicon id="password" class="block w-full" type="password" name="password" required
+                            autocomplete="new-password" placeholder="{{ __('Password') }}" />
+                    </x-input-with-icon-wrapper>
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="space-y-2">
+                    <x-label for="password_confirmation" :value="__('Confirm Password')" />
+                    <x-input-with-icon-wrapper>
+                        <x-slot name="icon">
+                            <x-heroicon-o-lock-closed aria-hidden="true" class="w-5 h-5" />
+                        </x-slot>
+                        <x-input withicon id="password_confirmation" class="block w-full" type="password"
+                            name="password_confirmation" required placeholder="{{ __('Confirm Password') }}" />
+                    </x-input-with-icon-wrapper>
+                </div>
+
+                <div>
+                    <x-button class="justify-center w-full gap-2">
+                        <x-heroicon-o-user-add class="w-6 h-6" aria-hidden="true" />
+                        <span>{{ __('Register') }}</span>
+                    </x-button>
+                </div>
+
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                    {{ __('Already registered?') }}
+                    <a href="{{ route('login') }}" class="text-blue-500 hover:underline">
+                        {{ __('Login') }}
+                    </a>
+                </p>
             </div>
-        </div>
-    </div>
-</div>
-@endsection
+        </form>
+    </x-auth-card>
+</x-guest-layout>
