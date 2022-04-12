@@ -26,7 +26,7 @@
                 <x-icons.docter class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
             </x-slot>
         </x-sidebar.link>
-        <x-sidebar.link-patient title="Pasien" href="{{ route('patients.index') }}" :isActive="request()->routeIs('patients.index')" >
+        <x-sidebar.link-patient title="Pasien" href="{{ route('patients.index') }}" :isActive="request()->routeIs('patients.index') || request()->routeIs('patients.create') || request()->routeIs('patients.edit')" >
             <x-slot name="icon">
                 <x-icons.patient class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
             </x-slot>

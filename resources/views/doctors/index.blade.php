@@ -60,8 +60,8 @@
                             </form>
                         </tr>                
                     @empty
-                    <td colspan="5">
-                        {{__('Data tidak ditemukan')}}
+                    <td colspan="4">
+                        <h2 class="text-center text-sm dark:text-white py-3 font-bold">{{__('Data tidak ditemukan')}}</h2>
                     </td>
                     @endforelse
                 </tbody>

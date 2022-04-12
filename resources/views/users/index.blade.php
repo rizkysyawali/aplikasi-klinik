@@ -31,7 +31,7 @@
                             Role
                         </th>
                         <th scope="col" class="px-6 py-3 text-center">
-                            <span class="sr-only">Edit</span>
+                            <span >Edit</span>
                            
                         </th>
                     </tr>
@@ -68,7 +68,7 @@
                         </tr>                
                     @empty
                     <td colspan="5">
-                        {{__('Data tidak ditemukan')}}
+                        <h2 class="text-center text-sm dark:text-white py-3 font-bold">{{__('Data tidak ditemukan')}}</h2>
                     </td>
                     @endforelse
                 </tbody>

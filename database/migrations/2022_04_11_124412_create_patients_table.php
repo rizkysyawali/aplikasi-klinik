@@ -18,6 +18,7 @@ class CreatePatientsTable extends Migration
             $table->string('name');
             $table->string('gender');
             $table->integer('age');
+            $table->string('address');
             $table->timestamps();
         });
     }
