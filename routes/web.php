@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\DocterController;
+use App\Http\Controllers\PatientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,25 +17,41 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 // useless routes
 // Just to demo sidebar dropdown links active states.
-Route::get('/buttons/text', function () {
-    return view('buttons-showcase.text');
-})->middleware(['auth'])->name('buttons.text');
 
-Route::get('/buttons/icon', function () {
-    return view('buttons-showcase.icon');
-})->middleware(['auth'])->name('buttons.icon');
+Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function()
+{
+    Route::get('dashboard', function() {return view('dashboard');} )->name('dashboard');
+    Route::get('users', [UserController::class, 'index'] )->name('users.index');
+    Route::get('users/create', [UserController::class, 'create'] )->name('users.create');
+    Route::get('users/edit/{id}', [UserController::class, 'edit'] )->name('users.edit');
+    Route::put('users/update/{id}', [UserController::class, 'update'] )->name('users.update');
+    Route::post('users', [UserController::class, 'store'] )->name('users.store');
+    Route::delete('users/delete/{id}', [UserController::class, 'delete'] )->name('users.delete');
 
-Route::get('/buttons/text-icon', function () {
-    return view('buttons-showcase.text-icon');
-})->middleware(['auth'])->name('buttons.text-icon');
+
+    Route::get('docters', [DocterController::class, 'index'] )->name('docters.index');
+    Route::get('patients', [PatientController::class, 'index'] )->name('patients.index');
+
+
+
+
+});
+
+// Route::get('/buttons/text', function () {
+//     return view('buttons-showcase.text');
+// })->middleware(['auth'])->name('buttons.text');
+
+// Route::get('/buttons/icon', function () {
+//     return view('buttons-showcase.icon');
+// })->middleware(['auth'])->name('buttons.icon');
+
+// Route::get('/buttons/text-icon', function () {
+//     return view('buttons-showcase.text-icon');
+// })->middleware(['auth'])->name('buttons.text-icon');
 
 require __DIR__ . '/auth.php';

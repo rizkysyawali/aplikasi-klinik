@@ -6,7 +6,7 @@
         </x-slot>
     </x-sidebar.link>
 
-    <x-sidebar.dropdown title="Buttons" :active="Str::startsWith(request()->route()->uri(), 'buttons')">
+    {{-- <x-sidebar.dropdown title="Buttons" :active="Str::startsWith(request()->route()->uri(), 'buttons')">
         <x-slot name="icon">
             <x-heroicon-o-view-grid class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
         </x-slot>
@@ -17,16 +17,20 @@
             :active="request()->routeIs('buttons.icon')" />
         <x-sidebar.sublink title="Text with icon" href="{{ route('buttons.text-icon') }}"
             :active="request()->routeIs('buttons.text-icon')" />
-    </x-sidebar.dropdown>
+    </x-sidebar.dropdown> --}}
 
-    <div x-transition x-show="isSidebarOpen || isSidebarHovered" class="text-sm text-gray-500">Dummy Links</div>
+    <div x-transition x-show="isSidebarOpen || isSidebarHovered" class="text-sm text-gray-500">Data</div>   
+        <x-sidebar.link title="User" href="{{ route('users.index') }}" :isActive="request()->routeIs('users.index') || request()->routeIs('users.create') || request()->routeIs('users.edit')" />
+        <x-sidebar.link title="Dokter" href="{{ route('docters.index') }}" :isActive="request()->routeIs('docters.index')" >
+            <x-slot name="icon">
+                <x-icons.docter class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
+            </x-slot>
+        </x-sidebar.link>
+        <x-sidebar.link-patient title="Pasien" href="{{ route('patients.index') }}" :isActive="request()->routeIs('patients.index')" >
+            <x-slot name="icon">
+                <x-icons.patient class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
+            </x-slot>
+        </x-sidebar.link>
 
-    @php
-        $links = array_fill(0, 20, '');
-    @endphp
-
-    @foreach ($links as $index => $link)
-        <x-sidebar.link title="Dummy link {{ $index + 1 }}" href="#" />
-    @endforeach
-       
+    <div x-transition x-show="isSidebarOpen || isSidebarHovered" class="text-sm text-gray-500">Registrasi Pasien</div> 
 </x-perfect-scrollbar>
