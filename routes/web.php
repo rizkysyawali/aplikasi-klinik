@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\DocterController;
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\PatientController;
 
 /*
@@ -34,8 +34,20 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function()
     Route::delete('users/delete/{id}', [UserController::class, 'delete'] )->name('users.delete');
 
 
-    Route::get('docters', [DocterController::class, 'index'] )->name('docters.index');
+    Route::get('doctors', [DoctorController::class, 'index'] )->name('doctors.index');
+    Route::get('doctors/create', [DoctorController::class, 'create'] )->name('doctors.create');
+    Route::get('doctors/edit/{id}', [DoctorController::class, 'edit'] )->name('doctors.edit');
+    Route::put('doctors/update/{id}', [DoctorController::class, 'update'] )->name('doctors.update');
+    Route::post('doctors', [DoctorController::class, 'store'] )->name('doctors.store');
+    Route::delete('doctors/delete/{id}', [DoctorController::class, 'delete'] )->name('doctors.delete');
+
+
     Route::get('patients', [PatientController::class, 'index'] )->name('patients.index');
+    Route::get('patients/create', [PatientController::class, 'create'] )->name('patients.create');
+    Route::get('patients/edit/{id}', [PatientController::class, 'edit'] )->name('patients.edit');
+    Route::put('patients/update/{id}', [PatientController::class, 'update'] )->name('patients.update');
+    Route::post('patients', [PatientController::class, 'store'] )->name('patients.store');
+    Route::delete('patients/delete/{id}', [PatientController::class, 'delete'] )->name('patients.delete');
 
 
 

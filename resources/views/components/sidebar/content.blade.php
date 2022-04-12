@@ -21,7 +21,7 @@
 
     <div x-transition x-show="isSidebarOpen || isSidebarHovered" class="text-sm text-gray-500">Data</div>   
         <x-sidebar.link title="User" href="{{ route('users.index') }}" :isActive="request()->routeIs('users.index') || request()->routeIs('users.create') || request()->routeIs('users.edit')" />
-        <x-sidebar.link title="Dokter" href="{{ route('docters.index') }}" :isActive="request()->routeIs('docters.index')" >
+        <x-sidebar.link title="Dokter" href="{{ route('doctors.index') }} " :isActive="request()->routeIs('doctors.index') || request()->routeIs('doctors.create') || request()->routeIs('doctors.edit')" >
             <x-slot name="icon">
                 <x-icons.docter class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
             </x-slot>

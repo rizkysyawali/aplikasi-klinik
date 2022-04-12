@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Treatment;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Patient extends Model
+class Doctor extends Model
 {
     use HasFactory;
 
-    protected $fillabel = ['name', 'gender', 'age'];
+    protected $fillable = ['name', 'specialist'];
 
     public function treatment() 
     {
