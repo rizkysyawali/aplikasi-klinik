@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\TreatmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,12 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function()
     Route::delete('patients/delete/{id}', [PatientController::class, 'delete'] )->name('patients.delete');
 
 
+    Route::get('treatment', [TreatmentController::class, 'index'] )->name('treatment.index');
+    Route::get('treatment/create', [TreatmentController::class, 'create'] )->name('treatment.create');
+    Route::get('treatment/edit/{id}', [TreatmentController::class, 'edit'] )->name('treatment.edit');
+    Route::put('treatment/update/{id}', [TreatmentController::class, 'update'] )->name('treatment.update');
+    Route::post('treatment', [TreatmentController::class, 'store'] )->name('treatment.store');
+    Route::delete('treatment/delete/{id}', [TreatmentController::class, 'delete'] )->name('treatment.delete');
 
 
 });

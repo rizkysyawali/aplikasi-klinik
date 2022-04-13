@@ -33,4 +33,13 @@
         </x-sidebar.link>
 
     <div x-transition x-show="isSidebarOpen || isSidebarHovered" class="text-sm text-gray-500">Registrasi Pasien</div> 
+        <x-sidebar.link title="Daftar" href="{{ route('treatment.index') }} " :isActive="request()->routeIs('treatment.index') || request()->routeIs('treatment.create') || request()->routeIs('treatment.edit')" >
+            <x-slot name="icon">
+                <x-icons.folder class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
+            </x-slot>
+        </x-sidebar.link>
+
+
+
+
 </x-perfect-scrollbar>
