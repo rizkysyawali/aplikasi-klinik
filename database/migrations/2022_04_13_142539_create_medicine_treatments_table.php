@@ -17,7 +17,8 @@ class CreateMedicineTreatmentsTable extends Migration
             $table->id();
             $table->foreignId('medicine_id')->constrained()->onDelete('cascade');
             $table->foreignId('treatment_id')->constrained()->onDelete('cascade');
-            $table->string('amount');
+            $table->integer('amount');
+            $table->integer('total');
             $table->timestamps();
         });
     }

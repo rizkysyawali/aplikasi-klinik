@@ -6,6 +6,7 @@ use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\TreatmentController;
+use App\Http\Controllers\MedicineTreatmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,12 +69,17 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function()
     Route::delete('medicines/delete/{id}', [MedicineController::class, 'delete'] )->name('medicines.delete');
 
 
-    oute::get('prescription', [MedicineTreatmentController::class, 'index'] )->name('prescription.index');
+    Route::get('prescription', [MedicineTreatmentController::class, 'index'] )->name('prescription.index');
     Route::get('prescription/create', [MedicineTreatmentController::class, 'create'] )->name('prescription.create');
     Route::get('prescription/edit/{id}', [MedicineTreatmentController::class, 'edit'] )->name('prescription.edit');
     Route::put('prescription/update/{id}', [MedicineTreatmentController::class, 'update'] )->name('prescription.update');
     Route::post('prescription', [MedicineTreatmentController::class, 'store'] )->name('prescription.store');
     Route::delete('prescription/delete/{id}', [MedicineTreatmentController::class, 'delete'] )->name('prescription.delete');
+
+    Route::get('fetchData', [MedicineTreatmentController::class, 'getData'] )->name('getData');
+    Route::post('postData', [MedicineTreatmentController::class, 'postData'] )->name('postData');
+
+
 });
 
 require __DIR__ . '/auth.php';

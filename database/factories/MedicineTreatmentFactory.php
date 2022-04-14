@@ -23,10 +23,13 @@ class MedicineTreatmentFactory extends Factory
      */
     public function definition()
     {
+        $price = [5000, 10000, 15000,  20000, 50000];
+
         return [
             'medicine_id' => mt_rand(1,20)  ,
             'treatment_id' =>  mt_rand(1,50) ,
-            'amount'  => mt_rand(100,200),
+            'amount'  => mt_rand(1,5),
+            'total'  => $price[mt_rand(0,4)] * mt_rand(2,5),
         ];
     }
 }

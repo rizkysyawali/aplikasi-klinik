@@ -38,7 +38,7 @@
                 <x-icons.folder class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
             </x-slot>
         </x-sidebar.link>
-        <x-sidebar.link title="Resep Obat" href="{{ route('treatment.index') }} " :isActive="request()->routeIs('treatment.index') || request()->routeIs('treatment.create') || request()->routeIs('treatment.edit')" >
+        <x-sidebar.link title="Resep Obat" href="{{ route('prescription.index') }} " :isActive="request()->routeIs('prescription.index') || request()->routeIs('prescription.create') || request()->routeIs('prescription.edit')" >
             <x-slot name="icon">
                 <x-icons.resep class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
             </x-slot>

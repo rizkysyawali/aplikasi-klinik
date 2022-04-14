@@ -13,7 +13,7 @@ class MedicineTreatment extends Model
 
     protected $table ='medicine_treatments';
 
-    protected $fillable = ['medicine_id', 'treatment_id', 'amount'];
+    protected $fillable = ['medicine_id', 'treatment_id', 'amount', 'total'];
 
     public function medicine()
     {
