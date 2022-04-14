@@ -38,6 +38,18 @@
                 <x-icons.folder class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
             </x-slot>
         </x-sidebar.link>
+        <x-sidebar.link title="Resep Obat" href="{{ route('treatment.index') }} " :isActive="request()->routeIs('treatment.index') || request()->routeIs('treatment.create') || request()->routeIs('treatment.edit')" >
+            <x-slot name="icon">
+                <x-icons.resep class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
+            </x-slot>
+        </x-sidebar.link>
+
+    <div x-transition x-show="isSidebarOpen || isSidebarHovered" class="text-sm text-gray-500">Stok Barang</div> 
+        <x-sidebar.link title="Obat" href="{{ route('medicines.index') }} " :isActive="request()->routeIs('medicines.index') || request()->routeIs('medicines.create') || request()->routeIs('medicines.edit')" >
+            <x-slot name="icon">
+                <x-icons.stock class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
+            </x-slot>
+        </x-sidebar.link>
 
 
 

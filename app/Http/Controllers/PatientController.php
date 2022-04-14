@@ -11,7 +11,7 @@ class PatientController extends Controller
 {
     public function index () 
     {
-        $patients = Patient::latest()->paginate(3);
+        $patients = Patient::latest()->paginate(10);
         return view('patients.index', compact('patients'));
     }
 

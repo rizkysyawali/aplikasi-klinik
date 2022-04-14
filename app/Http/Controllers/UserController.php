@@ -3,16 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Doctor;
+use App\Models\Patient;
+use App\Models\Treatment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
-    
+    public function dashboard() 
+    {
+        $patients = Patient::count();
+        $doctors = Doctor::count();
+        $treatment = Treatment::count();
+
+        return view('dashboard', compact('patients','doctors', 'treatment' ));
+    }
+
     public function index() 
     {
-        $users = User::latest()->paginate(3);
+        $users = User::latest()->paginate(5);
 
         return view('users.index', compact('users'));
     }

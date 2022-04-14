@@ -1,4 +1,4 @@
-<svg {{ $attributes }} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+<svg {{ $attributes }} viewBox="0 0 28 28" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
     <path 
     d="M18.208,2.958H8.875V1.792c0-0.644-0.522-1.167-1.167-1.167H1.875c-0.644,0-1.167,0.522-1.167,1.167v16.333
         c0,0.645,0.522,1.166,1.167,1.166h16.333c0.645,0,1.167-0.521,1.167-1.166v-14C19.375,3.48,18.853,2.958,18.208,2.958z

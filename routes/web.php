@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\TreatmentController;
 
 /*
@@ -26,7 +27,7 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function()
 {
-    Route::get('dashboard', function() {return view('dashboard');} )->name('dashboard');
+    Route::get('dashboard', [UserController::class, 'dashboard'] )->name('dashboard');
     Route::get('users', [UserController::class, 'index'] )->name('users.index');
     Route::get('users/create', [UserController::class, 'create'] )->name('users.create');
     Route::get('users/edit/{id}', [UserController::class, 'edit'] )->name('users.edit');
@@ -59,18 +60,20 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function()
     Route::delete('treatment/delete/{id}', [TreatmentController::class, 'delete'] )->name('treatment.delete');
 
 
+    Route::get('medicines', [MedicineController::class, 'index'] )->name('medicines.index');
+    Route::get('medicines/create', [MedicineController::class, 'create'] )->name('medicines.create');
+    Route::get('medicines/edit/{id}', [MedicineController::class, 'edit'] )->name('medicines.edit');
+    Route::put('medicines/update/{id}', [MedicineController::class, 'update'] )->name('medicines.update');
+    Route::post('medicines', [MedicineController::class, 'store'] )->name('medicines.store');
+    Route::delete('medicines/delete/{id}', [MedicineController::class, 'delete'] )->name('medicines.delete');
+
+
+    oute::get('prescription', [MedicineTreatmentController::class, 'index'] )->name('prescription.index');
+    Route::get('prescription/create', [MedicineTreatmentController::class, 'create'] )->name('prescription.create');
+    Route::get('prescription/edit/{id}', [MedicineTreatmentController::class, 'edit'] )->name('prescription.edit');
+    Route::put('prescription/update/{id}', [MedicineTreatmentController::class, 'update'] )->name('prescription.update');
+    Route::post('prescription', [MedicineTreatmentController::class, 'store'] )->name('prescription.store');
+    Route::delete('prescription/delete/{id}', [MedicineTreatmentController::class, 'delete'] )->name('prescription.delete');
 });
-
-// Route::get('/buttons/text', function () {
-//     return view('buttons-showcase.text');
-// })->middleware(['auth'])->name('buttons.text');
-
-// Route::get('/buttons/icon', function () {
-//     return view('buttons-showcase.icon');
-// })->middleware(['auth'])->name('buttons.icon');
-
-// Route::get('/buttons/text-icon', function () {
-//     return view('buttons-showcase.text-icon');
-// })->middleware(['auth'])->name('buttons.text-icon');
 
 require __DIR__ . '/auth.php';

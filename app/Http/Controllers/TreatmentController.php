@@ -15,7 +15,7 @@ class TreatmentController extends Controller
       
         $treatment = Treatment::with('patient', 'doctor')
         ->latest()
-        ->paginate(3);
+        ->paginate(10);
        
         return view('treatment.index', compact('treatment'));
     }
