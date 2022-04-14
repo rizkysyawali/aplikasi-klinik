@@ -15,13 +15,13 @@ class MedicineTreatmentController extends Controller
     {
         $prescriptions = Treatment::has('medicineTreatment')
         ->with('medicineTreatment.medicine', 'patient','doctor')
-        // ->get();
+      
         ->paginate(5);
 
         $patients = Patient::whereHas('treatment.medicineTreatment.medicine')
         ->with('treatment.medicineTreatment.medicine', 'treatment.doctor')
         ->paginate(5);
-        // dd($prescriptions);
+     
         return view('prescription.index', compact('prescriptions', 'patients'));
     }
 
@@ -54,22 +54,22 @@ class MedicineTreatmentController extends Controller
     
     }
 
-    public function postData(Request $request) 
-    {
+    // public function postData(Request $request) 
+    // {
    
-        // $data = MedicineTreatment::create([
-        //     'treatment_id' => $request->treatment_id,
-        //     'medicine_id' => $request->medicine_id,
-        //     'amount' => $request->amount,
+    //     // $data = MedicineTreatment::create([
+    //     //     'treatment_id' => $request->treatment_id,
+    //     //     'medicine_id' => $request->medicine_id,
+    //     //     'amount' => $request->amount,
 
-        // ]);
-        $data = $request->medicine_id;
-        return response()->json([
-            'status' => $data,
+    //     // ]);
+    //     $data = $request->medicine_id;
+    //     return response()->json([
+    //         'status' => $data,
 
-        ]);
+    //     ]);
     
-    }
+    // }
 
     public function store(Request $request) 
     {

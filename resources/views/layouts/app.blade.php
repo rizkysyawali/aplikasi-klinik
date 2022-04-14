@@ -116,58 +116,32 @@
                 $("#row"+button_id+'').remove();
 
             })
-            $('#submit').click(function() {
-               var medicine_id = $('.medicine').val();
-                var treatment_id = $('.ctreatment').val();
-                var amount = $('.camount').val();
+            //     $('#submit').click(function() {
+            //     var medicine_id = $('.medicine').val();
+            //         var treatment_id = $('.ctreatment').val();
+            //         var amount = $('.camount').val();
 
-                $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                url: "/admin/postData",
-                type: "POST",
-                data: 
-                { 
-                    treatment_id: treatment_id,
-                    medicine_id: medicine_id,
-                    amount: amount,
-                },
-                success: function(resp) {
-                console.log(resp);
-                },
-                error: function(resp) {
-                    console.log(resp);
-                }
-            });
-            });
+            //         $.ajax({
+            //         headers: {
+            //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //             },
+            //         url: "/admin/postData",
+            //         type: "POST",
+            //         data: 
+            //         { 
+            //             treatment_id: treatment_id,
+            //             medicine_id: medicine_id,
+            //             amount: amount,
+            //         },
+            //         success: function(resp) {
+            //         console.log(resp);
+            //         },
+            //         error: function(resp) {
+            //             console.log(resp);
+            //         }
+            //     });
+            // });
             
-            function fetchData() {
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                    url: "/admin/fetchData",
-                    type: "GET",
-                    success: function(resp) {
-                    
-                    $('#form-submit').html("");
-                        $.each(resp.data.medicines, function (index, row) { 
-                            $('#form-submit').append('<div class="grid gap-8 p-4 sm:grid-cols-2 md:grid-cols-4" ><div class="space-y-2"><label for="name" value="Data Berobat" /><div class="flex justify-start"><div class="mb-3 w-full "><select name="treatment" class="form-select w-full text-base font-normal dark:text-white-700 dark:focus:ring-gray-600 dark:focus:bg-gray-600 dark:bg-gray-700 dark:border-gray-600 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white-700 focus:bg-white focus:border-blue-600 focus:outline-none"  aria-label="Default select example" required ><option disabled selected>--Pilih--</option><option value="'+row.id+'">'+row.id+'</option></select></div></div></div><div class="space-y-2"><label for="name" value="Data Obat" /><div class="flex justify-start"><div id="fMed" class="mb-3 w-full "></div></div></div><div class="space-y-2 mt-2"><input class="px-4 py-2 border-gray-400 rounded-md focus:border-gray-400 focus:ring focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-600 dark:bg-dark-eval-1 dark:text-gray-300 dark:focus:ring-offset-dark-eval-1" type="number" name="amount[]" value="old("amount")"required placeholder="{{ __("Jumlah") }}" /></div><div class="mt-2"><button id="addd" href="#" class="btn-remove px-4 py-2 text-base justify-center w-full gap-2 bg-red-500 text-white hover:bg-red-600 focus:ring-red-500 px-4 py-2 text-base rounded-md">Tambah Obat</button></div></div>')
-                            console.log(row);
-                        })
-                        $.each(resp.data.treatments, function (index, row) { 
-                            // $('#fMed').append('<select name="treatment" class="form-select w-full text-base font-normal dark:text-white-700 dark:focus:ring-gray-600 dark:focus:bg-gray-600 dark:bg-gray-700 dark:border-gray-600 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white-700 focus:bg-white focus:border-blue-600 focus:outline-none"  aria-label="Default select example" required ><option disabled selected>--Pilih--</option><option value="'+row.id+'">'+row.name+'</option></select>')
-                            console.log(row);
-                        })
-                    },
-
-                    
-                    error: function(resp) {
-                        console.log(resp);
-                    }
-                });
-            }
        })
     </script>
 </body>
