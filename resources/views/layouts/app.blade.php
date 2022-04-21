@@ -14,6 +14,7 @@
         rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.1/dist/flowbite.min.css" />
     <!-- Styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         [x-cloak] {
             display: none;
@@ -65,9 +66,12 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/flowbite@1.4.1/dist/datepicker.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     @stack('scripts')
     <script>
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
        
        $(document).ready(function() {
         var i = 1;
@@ -90,10 +94,9 @@
                     $.each(resp.data.treatments,function(key,value){
                         $('.treatment').append($("<option/>", {
                            value: value.id,
-                           text: value.id
+                           text: value.patient.name
                         }));
                     });
-
                     $.each(resp.data.medicines,function(key,value){
                         $('.medicine').append($("<option/>", {
                            value: value.id,
@@ -103,7 +106,6 @@
                         
                     },
 
-                    
                     error: function(resp) {
                         console.log(resp);
                     }

@@ -17,7 +17,7 @@
                 <div class="grid gap-8 p-4 sm:grid-cols-2 md:grid-cols-4" >
                     <!-- Id Berobat -->
                     <div class="space-y-2">
-                        <x-label for="name" :value="__('ID data Berobat')" />
+                        <x-label for="name" :value="__('Nama Pasien')" />
                         <div class="flex justify-start">
                             <div class="mb-3 w-full ">
                                 <select id="treatment" name="treatment[]" class="treatment form-select
@@ -35,7 +35,7 @@
                                 aria-label="Default select example" required>
                                     <option disabled selected>--Pilih--</option>
                                     @foreach ($treatments as $treatment)
-                                        <option value="{{$treatment->id}}">{{$treatment->id}}</option>
+                                        <option value="{{$treatment->id}}">{{$treatment->patient->name}}</option>
                                     @endforeach
                                   
                                 </select>
@@ -48,7 +48,7 @@
                         <x-label for="name" :value="__('Nama Obat')" />
                         <div class="flex justify-start">
                             <div class="mb-3 w-full ">
-                                <select id="medicine" name="medicine[]" class="medicine form-select
+                                <select id="medicine" name="medicine[]" class="medicine  form-select
                                 w-full
                                 text-base
                                 font-normal
@@ -60,8 +60,8 @@
                                 ease-in-out
                                 m-0
                                 focus:text-white-700 focus:bg-white focus:border-blue-600 focus:outline-none" 
-                                aria-label="Default select example" required >
-                                    <option disabled selected>--Pilih-</option>
+                                aria-label="Default select example"  required >
+                                    <option disabled selected>--Pilih--</option>
                                     @foreach ($medicines as $medicine)
                                         <option value="{{$medicine->id}}">{{$medicine->name}}</option>
                                     @endforeach
@@ -70,7 +70,7 @@
                         </div>
                     </div>
     
-                     <!-- Keluhan -->
+                     <!-- Jumlah -->
                      <div class="space-y-2">
                         <x-label for="amount" :value="__('Jumlah')" />
                         <x-input-with-icon-wrapper>

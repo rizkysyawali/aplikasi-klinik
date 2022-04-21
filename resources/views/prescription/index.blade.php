@@ -50,7 +50,7 @@
                 </thead>
                 <tbody>
                     @forelse ($prescriptions as $key => $prescription)
-                        
+                            
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                             <th scope="row" class="text-center px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                                 {{$key+1}}
@@ -63,13 +63,13 @@
                                 
                             </td>
                             <td class="px-6 py-4 text-center">
-                                {{$prescription->created_at->format('m/Y')}}
+                                {{$prescription->created_at->format('d/m/Y')}}
                             </td>
                             <td class="px-6 py-4 text-center">
                                 @foreach ($prescription->medicineTreatment as $medicine)
                                 <p>- {{$medicine->medicine->name}}</p> 
                                 @endforeach
-                             
+                            
                             </td>
                             <td class="px-6 py-4 text-center">
                                 @foreach ($prescription->medicineTreatment as $medicine)
@@ -83,33 +83,34 @@
                                 @endforeach
                             </td>
                             <td class="px-6 py-4 text-center">
-                                @foreach ($prescription->medicineTreatment as $medicine)
+                            
                                 <p> 
-                                    @php
+                                    {{ "Rp " . number_format($prescription->medicineTreatment->sum(function($medicine) {
                                         $total = $medicine->amount * $medicine->medicine->price;
-                                        echo $total++;
-                                    @endphp
-                                
+                                        return $total;
+                                    }),0,',','.')}}
                                 </p> 
-                                @endforeach
+                            
                             </td>
                             <td class="px-6 py-4 text-center">
-                                <a href="{{ route('prescription.delete', $prescription->id ) }}" onclick="event.preventDefault();
-                                document.getElementById('delete-form').submit();"
-                                type="button" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-sm 2.5 text-center px-3 py-1.5 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900" >
-                                    <span>Hapus</span>
-                                </a>
+                                <form id="delete-form" action="{{ route('prescription.delete', $prescription->id) }}" method="POST">
+                                    @method('delete')
+                                    @csrf
+                                    <button type="submit" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-sm 2.5 text-center px-3 py-1.5 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900" >
+                                        <span>Hapus </span>
+                                    </button>
+                                 
+                                </form>
                             </td>
-                            <form id="delete-form" action="{{ route('prescription.delete', $prescription->id) }}" method="POST" style="display: none;">
-                                @method('delete')
-                                @csrf
-                            </form>
                         </tr>                
                     @empty
-                    <td colspan="8">
-                        <h2 class="text-center text-sm dark:text-white py-5 font-bold">{{__('Data tidak ditemukan')}}</h2>
-                    </td>
+                        <td colspan="8">
+                            <h2 class="text-center text-sm dark:text-white py-5 font-bold">{{__('Data tidak ditemukan')}}</h2>
+                        </td>
                     @endforelse
+
+                 
+                  
                 </tbody>
                 <tfoot>
                     <tr>

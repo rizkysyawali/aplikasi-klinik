@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Patient;
 use App\Models\Medicine;
 use App\Models\Treatment;
@@ -15,28 +16,29 @@ class MedicineTreatmentController extends Controller
     {
         $prescriptions = Treatment::has('medicineTreatment')
         ->with('medicineTreatment.medicine', 'patient','doctor')
-      
-        ->paginate(5);
+        ->latest()
+        ->paginate(10);
 
-        $patients = Patient::whereHas('treatment.medicineTreatment.medicine')
-        ->with('treatment.medicineTreatment.medicine', 'treatment.doctor')
-        ->paginate(5);
+
      
-        return view('prescription.index', compact('prescriptions', 'patients'));
+        return view('prescription.index', compact('prescriptions'));
     }
 
     public function create() 
     {
-        $treatments = Treatment::all();
+        $treatments = Treatment::with('patient')
+        ->whereDate('created_at',  Carbon::today())->get();
         $medicines = Medicine::all();
-    
+      
 
         return view('prescription.create', compact('treatments', 'medicines'));
     }
 
     public function getData() 
     {
-        $treatments = Treatment::all();
+        $treatments = Treatment::with('patient')
+        ->whereDate('created_at',  Carbon::today())->get();
+        
         $medicines = Medicine::all();
 
         $data = [];
@@ -78,58 +80,24 @@ class MedicineTreatmentController extends Controller
         $amount = $request->input('amount');
         $number = count($medicine);
         
-        // $medicine = collect($request->input('medicine', []))
-        // ->map(function($medicine){
-        //     return ['medicine_id', $medicine];
-        // });
+        for ($i=0; $i < $number; $i++) { 
+            $data = MedicineTreatment::create([
+                'treatment_id' => $treatment[$i],
+                'medicine_id' => $medicine[$i],
+                'amount' => $amount[$i],
+                'total' => $amount[$i] * Medicine::find($medicine[$i])->price,
 
-        // $treatment = collect($request->input('treatment', []))
-        // ->map(function($treatment){
-        //     return ['treatment_id', $treatment];
-        // });
-        //     if ($number >1) {
-        //         for ($i=0; $i < $number ; $i++) { 
-        //             if (trim($medicine[$i] != '')) {
-        //                 MedicineTreatment::create([
-        //                     'medicine_id' => $medicine[$i],
-        //                     'treatment_id' => $treatment[$i],
-        //                     'amount' => $amount[$i],
-        //                 ]);
-        //             }
-        //         }
-        //     } else {
-        //         MedicineTreatment::create([
-        //             'medicine_id' => $medicine,
-        //             'treatment_id' => $treatment,
-        //             'amount' => $amount,
-        // ]);
-        //     }
-  
-
-        // $amount = collect($request->input('amount', []))
-        // ->map(function($amount){
-        //     return ['amount', $amount];
-        // });
-       
-        // $prescription = MedicineTreatment::create([
-        //     'medicine_id' => $request->medicine,
-        //     'treatment_id' => $request->treatment,
-        //     'amount' => $request->amount,
-        // ]);
-        // dd($prescription );
-            // $medicine = Medicine::whereIn('id', '');
+            ]);
         
-    for ($i = 0; $i < $number; $i++) {
-        $prescription[] = [
-            'medicine_id' => $request->medicine[$i],
-            'treatment_id' => $request->treatment[$i],
-            'amount' => $request->amount[$i],
-            'total' => 50000 
-        ];
-    }
-    MedicineTreatment::insert($prescription);
+            $sisaObat = Medicine::find($medicine[$i])->stock - $amount[$i];
+            Medicine::find($medicine[$i])->update([
+                'stock' => $sisaObat,
+            ]);
+        }
+
+     
         Alert::toast('Data berhasil ditambah', 'success');
-        return redirect('/admin/prescription');
+        return redirect()->route('prescription.index');
     }
 
     public function edit($id) 
@@ -156,8 +124,17 @@ class MedicineTreatmentController extends Controller
 
     public function delete($id)
     {
-        $data = Medicine::find($id);
-        $data->delete();
+        
+        $data = MedicineTreatment::where('treatment_id',$id)->get();
+        foreach ($data as $key => $value) {
+            $sisaObat = Medicine::find($value->medicine_id)->stock + $value->amount;
+            Medicine::find($value->medicine_id)->update([
+                'stock' => $sisaObat,
+            ]);
+        }
+        MedicineTreatment::where('treatment_id',$id)->delete();
+    
+        
         Alert::toast('Data berhasil dihapus', 'success');
         return redirect()->back();
     }
