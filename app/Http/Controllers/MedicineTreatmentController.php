@@ -18,8 +18,6 @@ class MedicineTreatmentController extends Controller
         ->with('medicineTreatment.medicine', 'patient','doctor')
         ->latest()
         ->paginate(10);
-
-
      
         return view('prescription.index', compact('prescriptions'));
     }

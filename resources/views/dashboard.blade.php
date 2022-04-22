@@ -16,7 +16,7 @@
               <h6 class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light">
                 Jumlah Transaksi Obat
               </h6>
-              <span class="text-xl font-semibold">$30,000</span>
+              <span class="text-xl text-purple-500 font-semibold">{{ "Rp" . number_format($medTreat,0,',','.')  }}</span>
             </div>
             <div>
               <span>
@@ -33,7 +33,7 @@
               <h6 class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light">
                 Jumlah Pasien Terdaftar
               </h6>
-            <span class="text-xl font-semibold">{{$patients}}</span>
+            <span class="text-xl font-semibold text-purple-500">{{$patients}}</span>
             </div>
             <div>
               <span>
@@ -50,7 +50,7 @@
               <h6 class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light">
                 Jumlah Dokter
               </h6>
-              <span class="text-xl font-semibold">{{$doctors}}</span>
+              <span class="text-xl font-semibold text-purple-500">{{$doctors}}</span>
             </div>
             <div>
               <span>
@@ -67,7 +67,7 @@
               <h6 class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light">
                 Jumlah Resep
               </h6>
-              <span class="text-xl font-semibold">{{$treatment}}</span>
+              <span class="text-xl font-semibold text-purple-500">{{$treatment}}</span>
             </div>
             <div>
               <span>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Doctor;
+use App\Models\MedicineTreatment;
 use App\Models\Patient;
 use App\Models\Treatment;
 use Illuminate\Http\Request;
@@ -17,8 +18,9 @@ class UserController extends Controller
         $patients = Patient::count();
         $doctors = Doctor::count();
         $treatment = Treatment::count();
-
-        return view('dashboard', compact('patients','doctors', 'treatment' ));
+        $medTreat = MedicineTreatment::sum('total');
+       
+        return view('dashboard', compact('patients','doctors', 'treatment','medTreat'));
     }
 
     public function index() 

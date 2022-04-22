@@ -37,7 +37,7 @@
                             Harga Satuan
                         </th>
                         <th scope="col" class="px-6 py-3 text-center">
-                            Jumlah
+                            Banyaknya
                         </th>
                         <th scope="col" class="px-6 py-3 text-center">
                             Total Harga
@@ -85,7 +85,7 @@
                             <td class="px-6 py-4 text-center">
                             
                                 <p> 
-                                    {{ "Rp " . number_format($prescription->medicineTreatment->sum(function($medicine) {
+                                    {{ "Rp" . number_format($prescription->medicineTreatment->sum(function($medicine) {
                                         $total = $medicine->amount * $medicine->medicine->price;
                                         return $total;
                                     }),0,',','.')}}

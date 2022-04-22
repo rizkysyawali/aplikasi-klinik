@@ -26,6 +26,7 @@ class PatientFactory extends Factory
         $gen = ['Laki-laki', 'Perempuan'];
         return [
             'name' => $this->faker->name(),
+            'nik' => $this->faker->numerify('320413##########'),
             'gender'  => $gen[mt_rand(0,1)],
             'age'  => mt_rand(10,40),
             'address'  => $this->faker->address,
