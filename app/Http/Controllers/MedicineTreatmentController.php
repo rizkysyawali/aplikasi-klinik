@@ -79,7 +79,7 @@ class MedicineTreatmentController extends Controller
         $number = count($medicine);
         
         for ($i=0; $i < $number; $i++) { 
-            $data = MedicineTreatment::create([
+            MedicineTreatment::create([
                 'treatment_id' => $treatment[$i],
                 'medicine_id' => $medicine[$i],
                 'amount' => $amount[$i],
@@ -131,9 +131,9 @@ class MedicineTreatmentController extends Controller
             ]);
         }
         MedicineTreatment::where('treatment_id',$id)->delete();
-    
         
         Alert::toast('Data berhasil dihapus', 'success');
         return redirect()->back();
+
     }
 }
